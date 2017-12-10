@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.arc.ytpet.core.dao.ChargeMapper" >
+  <resultMap id="BaseResultMap" type="org.arc.ytpet.core.model.Charge" >
+    <id column="chargeid" property="chargeid" jdbcType="INTEGER" />
+    <result column="f_customid" property="fCustomid" jdbcType="INTEGER" />
+    <result column="chargetime" property="chargetime" jdbcType="TIMESTAMP" />
+    <result column="amount" property="amount" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    chargeid, f_customid, chargetime, amount
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_custom_chrginfo
+    where chargeid = #{chargeid,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_custom_chrginfo
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_custom_chrginfo
+    where chargeid = #{chargeid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.arc.ytpet.core.model.Charge" >
+    insert into t_custom_chrginfo (chargeid, f_customid, chargetime, 
+      amount)
+    values (#{chargeid,jdbcType=INTEGER}, #{fCustomid,jdbcType=INTEGER}, #{chargetime,jdbcType=TIMESTAMP}, 
+      #{amount,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="org.arc.ytpet.core.model.Charge" >
+    insert into t_custom_chrginfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="chargeid != null" >
+        chargeid,
+      </if>
+      <if test="fCustomid != null" >
+        f_customid,
+      </if>
+      <if test="chargetime != null" >
+        chargetime,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="chargeid != null" >
+        #{chargeid,jdbcType=INTEGER},
+      </if>
+      <if test="fCustomid != null" >
+        #{fCustomid,jdbcType=INTEGER},
+      </if>
+      <if test="chargetime != null" >
+        #{chargetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.arc.ytpet.core.model.Charge" >
+    update t_custom_chrginfo
+    <set >
+      <if test="fCustomid != null" >
+        f_customid = #{fCustomid,jdbcType=INTEGER},
+      </if>
+      <if test="chargetime != null" >
+        chargetime = #{chargetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where chargeid = #{chargeid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.arc.ytpet.core.model.Charge" >
+    update t_custom_chrginfo
+    set f_customid = #{fCustomid,jdbcType=INTEGER},
+      chargetime = #{chargetime,jdbcType=TIMESTAMP},
+      amount = #{amount,jdbcType=DOUBLE}
+    where chargeid = #{chargeid,jdbcType=INTEGER}
+  </update>
+</mapper>

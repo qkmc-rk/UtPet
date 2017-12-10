@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.arc.ytpet.core.dao.RecordMapper" >
+  <resultMap id="BaseResultMap" type="org.arc.ytpet.core.model.Record" >
+    <id column="recordid" property="recordid" jdbcType="INTEGER" />
+    <result column="f_customid" property="fCustomid" jdbcType="INTEGER" />
+    <result column="paytime" property="paytime" jdbcType="TIMESTAMP" />
+    <result column="paywhat" property="paywhat" jdbcType="VARCHAR" />
+    <result column="amount" property="amount" jdbcType="DOUBLE" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    recordid, f_customid, paytime, paywhat, amount, remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_custom_record
+    where recordid = #{recordid,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from t_custom_record
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_custom_record
+    where recordid = #{recordid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.arc.ytpet.core.model.Record" >
+    insert into t_custom_record (recordid, f_customid, paytime, 
+      paywhat, amount, remark
+      )
+    values (#{recordid,jdbcType=INTEGER}, #{fCustomid,jdbcType=INTEGER}, #{paytime,jdbcType=TIMESTAMP}, 
+      #{paywhat,jdbcType=VARCHAR}, #{amount,jdbcType=DOUBLE}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.arc.ytpet.core.model.Record" >
+    insert into t_custom_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="recordid != null" >
+        recordid,
+      </if>
+      <if test="fCustomid != null" >
+        f_customid,
+      </if>
+      <if test="paytime != null" >
+        paytime,
+      </if>
+      <if test="paywhat != null" >
+        paywhat,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="recordid != null" >
+        #{recordid,jdbcType=INTEGER},
+      </if>
+      <if test="fCustomid != null" >
+        #{fCustomid,jdbcType=INTEGER},
+      </if>
+      <if test="paytime != null" >
+        #{paytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paywhat != null" >
+        #{paywhat,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DOUBLE},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.arc.ytpet.core.model.Record" >
+    update t_custom_record
+    <set >
+      <if test="fCustomid != null" >
+        f_customid = #{fCustomid,jdbcType=INTEGER},
+      </if>
+      <if test="paytime != null" >
+        paytime = #{paytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paywhat != null" >
+        paywhat = #{paywhat,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DOUBLE},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where recordid = #{recordid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.arc.ytpet.core.model.Record" >
+    update t_custom_record
+    set f_customid = #{fCustomid,jdbcType=INTEGER},
+      paytime = #{paytime,jdbcType=TIMESTAMP},
+      paywhat = #{paywhat,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=DOUBLE},
+      remark = #{remark,jdbcType=VARCHAR}
+    where recordid = #{recordid,jdbcType=INTEGER}
+  </update>
+</mapper>

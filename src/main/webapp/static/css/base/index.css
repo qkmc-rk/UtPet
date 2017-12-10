@@ -1,0 +1,19 @@
+.menu-tap{
+	margin: auto;
+	height: 40px;
+	line-height: 40px;
+	width: 100%;
+	padding-left: 15px; 
+	text-decoration: none;
+	border-bottom: 1px solid #D5D5D5;
+	margin-bottom: 5px;
+}
+.menu-tap a{
+	text-decoration: none;
+}
+.menu-tap a:hover{
+	text-decoration: none;
+}
+.main{
+	margin-top: 100px;
+}

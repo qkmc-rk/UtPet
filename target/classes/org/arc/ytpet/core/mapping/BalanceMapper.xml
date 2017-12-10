@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.arc.ytpet.core.dao.BalanceMapper" >
+  <resultMap id="BaseResultMap" type="org.arc.ytpet.core.model.Balance" >
+    <id column="blcid" property="blcid" jdbcType="INTEGER" />
+    <result column="balance" property="balance" jdbcType="DOUBLE" />
+    <result column="f_customid" property="fCustomid" jdbcType="INTEGER" />
+    <result column="updtime" property="updtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    blcid, balance, f_customid, updtime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_custom_blc
+    where blcid = #{blcid,jdbcType=INTEGER}
+  </select>
+
+  <!--selectAll-->
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_custom_blc
+  </select>
+
+  <select id="selectByCustomId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from t_custom_blc
+    where f_customid = #{customId,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_custom_blc
+    where blcid = #{blcid,jdbcType=INTEGER}
+  </delete>
+  <!--通过用户id删除一个余额记录-->
+  <delete id="deleteByCustomId" parameterType="java.lang.Integer" >
+    delete from t_custom_blc
+    where f_customid = #{customId,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="org.arc.ytpet.core.model.Balance" >
+    insert into t_custom_blc (blcid, balance, f_customid, 
+      updtime)
+    values (#{blcid,jdbcType=INTEGER}, #{balance,jdbcType=DOUBLE}, #{fCustomid,jdbcType=INTEGER}, 
+      #{updtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="org.arc.ytpet.core.model.Balance" >
+    insert into t_custom_blc
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="blcid != null" >
+        blcid,
+      </if>
+      <if test="balance != null" >
+        balance,
+      </if>
+      <if test="fCustomid != null" >
+        f_customid,
+      </if>
+      <if test="updtime != null" >
+        updtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="blcid != null" >
+        #{blcid,jdbcType=INTEGER},
+      </if>
+      <if test="balance != null" >
+        #{balance,jdbcType=DOUBLE},
+      </if>
+      <if test="fCustomid != null" >
+        #{fCustomid,jdbcType=INTEGER},
+      </if>
+      <if test="updtime != null" >
+        #{updtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.arc.ytpet.core.model.Balance" >
+    update t_custom_blc
+    <set >
+      <if test="balance != null" >
+        balance = #{balance,jdbcType=DOUBLE},
+      </if>
+      <if test="fCustomid != null" >
+        f_customid = #{fCustomid,jdbcType=INTEGER},
+      </if>
+      <if test="updtime != null" >
+        updtime = #{updtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where blcid = #{blcid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.arc.ytpet.core.model.Balance" >
+    update t_custom_blc
+    set balance = #{balance,jdbcType=DOUBLE},
+      f_customid = #{fCustomid,jdbcType=INTEGER},
+      updtime = #{updtime,jdbcType=TIMESTAMP}
+    where blcid = #{blcid,jdbcType=INTEGER}
+  </update>
+
+  <!--updateBlcByCustomId-->
+  <update id="updateBlcByCustomId" parameterType="org.arc.ytpet.core.model.Balance" >
+    update t_custom_blc
+    set balance = #{balance,jdbcType=DOUBLE}
+    where f_customid = #{fCustomid,jdbcType=INTEGER}
+  </update>
+
+</mapper>

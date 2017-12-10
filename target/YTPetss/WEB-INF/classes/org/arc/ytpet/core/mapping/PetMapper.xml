@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.arc.ytpet.core.dao.PetMapper" >
+  <resultMap id="BaseResultMap" type="org.arc.ytpet.core.model.Pet" >
+    <id column="petid" property="petid" jdbcType="INTEGER" />
+    <result column="f_customid" property="fCustomid" jdbcType="INTEGER" />
+    <result column="pettype" property="pettype" jdbcType="CHAR" />
+    <result column="petname" property="petname" jdbcType="VARCHAR" />
+    <result column="petimage" property="petimage" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    petid, f_customid, pettype, petname, petimage
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_custom_pet
+    where petid = #{petid,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByCustomId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from t_custom_pet
+    where f_customid = #{customId,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_custom_pet
+    where petid = #{petid,jdbcType=INTEGER}
+  </delete>
+
+  <delete id="deleteByCustomId" parameterType="java.lang.Integer">
+    DELETE FROM t_custom_pet
+    WHERE f_customid = #{customId,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="org.arc.ytpet.core.model.Pet" >
+    insert into t_custom_pet (petid, f_customid, pettype, 
+      petname, petimage)
+    values (#{petid,jdbcType=INTEGER}, #{fCustomid,jdbcType=INTEGER}, #{pettype,jdbcType=CHAR}, 
+      #{petname,jdbcType=VARCHAR}, #{petimage,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.arc.ytpet.core.model.Pet" >
+    insert into t_custom_pet
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="petid != null" >
+        petid,
+      </if>
+      <if test="fCustomid != null" >
+        f_customid,
+      </if>
+      <if test="pettype != null" >
+        pettype,
+      </if>
+      <if test="petname != null" >
+        petname,
+      </if>
+      <if test="petimage != null" >
+        petimage,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="petid != null" >
+        #{petid,jdbcType=INTEGER},
+      </if>
+      <if test="fCustomid != null" >
+        #{fCustomid,jdbcType=INTEGER},
+      </if>
+      <if test="pettype != null" >
+        #{pettype,jdbcType=CHAR},
+      </if>
+      <if test="petname != null" >
+        #{petname,jdbcType=VARCHAR},
+      </if>
+      <if test="petimage != null" >
+        #{petimage,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.arc.ytpet.core.model.Pet" >
+    update t_custom_pet
+    <set >
+      <if test="fCustomid != null" >
+        f_customid = #{fCustomid,jdbcType=INTEGER},
+      </if>
+      <if test="pettype != null" >
+        pettype = #{pettype,jdbcType=CHAR},
+      </if>
+      <if test="petname != null" >
+        petname = #{petname,jdbcType=VARCHAR},
+      </if>
+      <if test="petimage != null" >
+        petimage = #{petimage,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where petid = #{petid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.arc.ytpet.core.model.Pet" >
+    update t_custom_pet
+    set f_customid = #{fCustomid,jdbcType=INTEGER},
+      pettype = #{pettype,jdbcType=CHAR},
+      petname = #{petname,jdbcType=VARCHAR},
+      petimage = #{petimage,jdbcType=VARCHAR}
+    where petid = #{petid,jdbcType=INTEGER}
+  </update>
+</mapper>

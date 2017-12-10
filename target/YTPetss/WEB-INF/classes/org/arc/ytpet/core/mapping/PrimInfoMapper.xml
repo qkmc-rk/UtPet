@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.arc.ytpet.core.dao.PrimInfoMapper" >
+  <resultMap id="BaseResultMap" type="org.arc.ytpet.core.model.PrimInfo" >
+    <id column="customid" property="customid" jdbcType="INTEGER" />
+    <result column="customname" property="customname" jdbcType="VARCHAR" />
+    <result column="customphone" property="customphone" jdbcType="VARCHAR" />
+    <result column="crttime" property="crttime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    customid, customname, customphone, crttime
+  </sql>
+  <!--查找所有-->
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from t_custom_prim
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_custom_prim
+    where customid = #{customid,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from t_custom_prim
+    where customname = #{customname,jdbcType=VARCHAR}
+  </select>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_custom_prim
+    where customid = #{customid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.arc.ytpet.core.model.PrimInfo" >
+    insert into t_custom_prim (customid, customname, customphone, 
+      crttime)
+    values (#{customid,jdbcType=INTEGER}, #{customname,jdbcType=VARCHAR}, #{customphone,jdbcType=VARCHAR}, 
+      #{crttime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="org.arc.ytpet.core.model.PrimInfo">
+    insert into t_custom_prim
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="customid != null" >
+        customid,
+      </if>
+      <if test="customname != null" >
+        customname,
+      </if>
+      <if test="customphone != null" >
+        customphone,
+      </if>
+      <if test="crttime != null" >
+        crttime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="customid != null" >
+        #{customid,jdbcType=INTEGER},
+      </if>
+      <if test="customname != null" >
+        #{customname,jdbcType=VARCHAR},
+      </if>
+      <if test="customphone != null" >
+        #{customphone,jdbcType=VARCHAR},
+      </if>
+      <if test="crttime != null" >
+        #{crttime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.arc.ytpet.core.model.PrimInfo" >
+    update t_custom_prim
+    <set >
+      <if test="customname != null" >
+        customname = #{customname,jdbcType=VARCHAR},
+      </if>
+      <if test="customphone != null" >
+        customphone = #{customphone,jdbcType=VARCHAR},
+      </if>
+      <if test="crttime != null" >
+        crttime = #{crttime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where customid = #{customid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.arc.ytpet.core.model.PrimInfo" >
+    update t_custom_prim
+    set customname = #{customname,jdbcType=VARCHAR},
+      customphone = #{customphone,jdbcType=VARCHAR},
+      crttime = #{crttime,jdbcType=TIMESTAMP}
+    where customid = #{customid,jdbcType=INTEGER}
+  </update>
+</mapper>
