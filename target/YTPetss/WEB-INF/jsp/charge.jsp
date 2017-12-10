@@ -110,6 +110,8 @@
 							<hr>
 							<label for="vipname">会员姓名:</label><input type="text" name="vipname" id="vipname" value="" placeholder="请输入会员姓名"/>
 							<label for="vipamount">充值金额:</label><input type="number" name="vipamount" id="vipamount" value="" placeholder="请输入充值金额"/>
+							<hr>
+							<label for="adminpwd">超级管理员密码:</label><input type="password" name="adminpwd" id="adminpwd" value="" placeholder="管理员密码"/>
 						</div>
 					</div>
 					<div class="modal-footer">

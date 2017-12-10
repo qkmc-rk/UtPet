@@ -32,13 +32,17 @@ function addcharge() {
     var customName = updateinfo[0].value;
     var amount = updateinfo[1].value;
 
+    //管理员密码
+    var adminpassword = updateinfo[2].value;
+
     $.ajax({
         type: "post",
         url: url_prefix + "/vip/recharge/charge",
         data: {
             token: window.localStorage.getItem("token"),
             customName:customName,
-            amount:amount
+            amount:amount,
+            adminpassword:adminpassword
         },
         async: true,
         dataType: 'json',

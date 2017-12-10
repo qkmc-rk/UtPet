@@ -169,10 +169,21 @@ public class VipControlller {
     @RequestMapping(value = "/balance/modify/{customId}", method = RequestMethod.POST)
     @ResponseBody
     public String modifyBalance(@PathVariable Integer customId, @RequestParam String token
-            , @RequestParam Double balance){
+            , @RequestParam Double balance, @RequestParam String adminpassword){
         //首先验证管理员的合法性
         if(!adminService.findAdminByPassword(token))
             return RS_FALSE;
+
+        /*
+        * @ description 增加超级管理员验证功能
+        * 假设超级管理员的密码是admin表中id为100和101的两个记录
+        * @ date 2017-12-10 16:47
+        * */
+        Admin admin = adminService.getAdminByPassword(adminpassword);
+        if(admin.getId() != 101 && admin.getId() != 100){
+            return RS_FALSE;
+        }
+
         //修改balance
         Balance balance1 = new Balance();
         //有且仅有这两个属性就OK了
@@ -223,10 +234,21 @@ public class VipControlller {
     @RequestMapping(value = "/recharge/charge", method = RequestMethod.POST)
     @ResponseBody
     public String charge(@RequestParam String token
-            , @RequestParam Double amount, @RequestParam String customName){
+            , @RequestParam Double amount, @RequestParam String customName, @RequestParam String adminpassword){
         //管理员判断
         if(!adminService.findAdminByPassword(token))
             return RS_FALSE;
+
+        /*
+        * @ description 增加超级管理员验证功能
+        * 假设超级管理员的密码是admin表中id为100和101的两个记录
+        * @ date 2017-12-10 16:47
+        * */
+        Admin admin = adminService.getAdminByPassword(adminpassword);
+        if(admin.getId() != 101 && admin.getId() != 100){
+            return RS_FALSE;
+        }
+
         /*
         * 写到这里我就非常难受了,接下去都是体力活动
         * 真是的,当个程序员巨JB难,脑力劳动干完接着干体力活动

@@ -44,6 +44,9 @@ function updateblc() {
     var customid = updateinfo[0].value;
     var balance = updateinfo[1].value;
 
+    //增加超级管理员功能
+    var adminpassword = updateinfo[2].value;
+    alert(adminpassword);
     //发送修改请求
     $.ajax({
         url:url_prefix + "/vip/balance/modify/" + customid,
@@ -51,7 +54,8 @@ function updateblc() {
         dataType:'json',
         data:{
             balance: balance,
-            token: window.localStorage.getItem("token")
+            token: window.localStorage.getItem("token"),
+            adminpassword: adminpassword
         },
         async:true,
         success:function (data) {
