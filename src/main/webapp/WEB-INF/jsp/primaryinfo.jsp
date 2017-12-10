@@ -149,7 +149,7 @@
 					<div class="modal-body">
 						<h3 style="width: 100%; text-align: center;">确认删除?</h3>
 						<p style="color: red">注意:</p>
-						<p>删除用户将删除用户的余额信息,宠物信息等(<span style="color:green;">不会删除充值记录与购物记录</span>),请谨慎操作!</p>
+						<p>删除用户将删除用户的余额信息,宠物信息等(<span style="color:red;">同样会删除充值记录与购物记录</span>),请谨慎操作!</p>
 					</div>
 					<div class="modal-footer">
 						<button type="button" id="canceldelete" class="btn btn-primary" data-dismiss="modal">取消</button>
@@ -196,7 +196,8 @@
 					<div class="modal-body">
 						<div id="vippetinfo">
 							<label>宠物照片:</label><img name="petimg" src="<%= request.getContextPath() %>/static/img/logo.gif" style="width: 50px; height: 50px;"/><span>此功能暂未实现</span>
-								<label for="vippettype">宠物类型:</label><input type="text" name="pettype" id="vippettype" value="" disabled="disabled"/>
+							<hr>
+							<label for="vippettype">宠物类型:</label><input type="text" name="pettype" id="vippettype" value="" disabled="disabled"/>
 								<label for="vippetname">宠物名字:</label><input type="text" name="petname" id="vippetname" value="" disabled="disabled"/>
 						</div>
 					</div>

@@ -41,4 +41,8 @@ public class AdminService {
     public void setAdminMapper(AdminMapper adminMapper) {
         this.adminMapper = adminMapper;
     }
+
+    public Admin getAdminByPassword(String adminpassword) {
+        return adminMapper.selectByPassword(adminpassword);
+    }
 }

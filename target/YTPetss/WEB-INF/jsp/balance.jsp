@@ -112,6 +112,8 @@
 							<hr>
 							<label for="customid">用户ID:</label><input type="text" name="customid" id="customid" value="" disabled="disabled"/>
 							<label for="newblc">新的余额:</label><input type="number" name="newblc" id="newblc" value=""/>
+							<hr>
+							<label for="adminpassword">超级管理员密码:</label><input type="password" name="adminpassword" id="adminpassword" value=""/>
 						</div>
 					</div>
 					<div class="modal-footer">
